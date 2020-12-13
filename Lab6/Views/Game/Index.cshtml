@@ -1,0 +1,46 @@
+﻿@model Lab6.App_Start.MyDbContext
+@{
+    ViewBag.Title = "Games";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<body>
+    <div>
+        <table style="width: 100%">
+            <tr>
+                <th>id</th>
+                <th>sport type</th>
+                <th>team1</th>
+                <th>team2</th>
+            </tr>
+            @foreach (var game in Model.Games.ToList())
+            {
+                <tr>
+                    <td>@game.id</td>
+                    <td>@game.sportType</td>
+                    <td>@game.team1</td>
+                    <td>@game.team2</td>
+                    <td><a href="/Game/Delete/@game.id/" role="button"><span aria-hidden="true">delete</span></a></td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <a class="btnbtn-primary" href="/Game/AddGame" role="button">Add new Game</a>
+    </div>
+
+    @using (Html.BeginForm("Update", "Game"))
+    {
+        <h6>Update game</h6>
+        <label>id</label>
+        <input type="text" name="id" id="id" value="" />
+        <label>sport type</label>
+        <input type="text" name="sportType" id="sportType" value="" />
+        <label>team1</label>
+        <input type="text" name="team1" id="team1" value="" />
+        <label>team2</label>
+        <input type="text" name="team2" id="team2" value="" />
+        <input type="submit" value="Update" />
+    }
+</body>

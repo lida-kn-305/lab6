@@ -1,0 +1,42 @@
+﻿@model Lab6.App_Start.MyDbContext
+@{
+    ViewBag.Title = "Countries";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<body>
+    <div>
+        <table style="width: 100%">
+            <tr>
+                <th>id</th>
+                <th>Country name</th>
+                <th>CapitalCity</th>
+            </tr>
+            @foreach (var country in Model.Countries.ToList())
+            {
+                <tr>
+                    <td>@country.id</td>
+                    <td>@country.name</td>
+                    <td>@country.capitalCity</td>
+                    <td><a href="/Country/Delete/@country.id/" role="button"><span aria-hidden="true">delete</span></a></td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <a class="btnbtn-primary" href="/Country/AddCountry" role="button">Add new Country</a>
+    </div>
+
+    @using (Html.BeginForm("Update", "Country"))
+    {
+        <h6>Update country</h6>
+        <label>id</label>
+        <input type="text" name="id" id="id" value="" />
+        <label>Name of the country</label>
+        <input type="text" name="name" id="name" value="" />
+        <label>CapitalCity</label>
+        <input type="text" name="capitalCity" id="capCity" value="" />
+        <input type="submit" value="Update" />
+    }
+</body>
